@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 from django.conf import settings
 from django.db import models
 from django.db.models.base import Model
@@ -45,13 +45,14 @@ class CourseListing(Model):
         rv += ">"
         return rv
 
-
 def get_all_courses() -> List[CourseListing]:
     return CourseListing.objects.all()
 
-
 def get_departments() -> List[str]:
     return list(set(map(lambda course: course.department, CourseListing.objects.all())))
+
+def get_course(department: str, number: int) -> Optional[CourseListing]:
+    return CourseListing.objects.get(department=department, number=number)
 
 class Professor(Model):
     department = CharField(max_length=255)
@@ -100,4 +101,14 @@ class Exam(Model):
     retake = BooleanField()
 
     def __str__(self) -> str:
-        return f"<Exam: course={self.course}, exam={self.exam}, score={self.score}k"
+        return f"<Exam: course={self.course}, exam={self.exam}, score={self.score}>"
+
+def create_course(department: str, number: int, title: Optional[str]):
+    if not CourseListing.objects.filter(department=department, number=number):
+        c = CourseListing(department=department, number=number, title=title)
+        c.save()
+
+def create_exam(course: CourseListing, score: float):
+    e = Exam(course=course, score=score)
+    e.save()
+
