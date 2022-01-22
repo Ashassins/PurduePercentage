@@ -9,17 +9,49 @@ import math
 
 def histo(p, hist, edges):
     #p = figure(title=title, tools='', background_fill_color="#fafafa")
+    # creates a quadrilateral for each of the buckets and sets the height relative to the frequency
+    # can add color based on the data
     p.quad(top=hist, bottom=0, left=edges[:-1], right=edges[1:],
-           fill_color="navy", line_color="white", alpha=0.5)
+           fill_color="navy", line_color="white", alpha=0.5) 
 
-    # change to fit the theming
+    # plot formatting
     p.y_range.start = 0
     p.legend.location = "center_right"
     p.legend.background_fill_color = "#fefefe"
     p.xaxis.axis_label = 'x'
     p.yaxis.axis_label = 'Pr(x)'
     p.grid.grid_line_color="white"
+
     return p
+
+def scatter(p, hori, vert) :
+    # add coloring based on the data
+    sz = 0.1
+    p.scatter(x = hori, y = vert, size = sz, marker = "asterix")
+    
+    # plot formatting
+    p.y_range.start = 0
+    p.legend.location = "center_right"
+    p.legend.background_fill_color = "#fefefe"
+    p.xaxis.axis_label = 'x'
+    p.yaxis.axis_label = 'Pr(x)'
+    p.grid.grid_line_color="white"
+
+    return p
+
+def pie(p) :
+
+    # plot formatting
+
+    return p
+    
+def boxandwhisker(p) :
+    
+    # plot formatting
+    
+    return p
+
+
 
 def index(request):
 # SQL Data Calls (Dummy Data, remove random number generation and the change measured to the data from the SQL database)
