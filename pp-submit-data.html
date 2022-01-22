@@ -45,9 +45,17 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <form>
-                            <a>What was your exam score?</a>
-                            <input type="number" class="form-control rounded-4" id="floatingInput" placeholder="(XX.XX%)">
+                        <form action="/input_score/" method="post">
+                            <label for="input_score">Your Exam Score: </label>
+                            <input id="input_score" type="number" class="form-control rounded-4" name="input_score" placeholder="(XX.XX%)" value="{{ input_score }}">
+                            <!-- <input class="button-primary" type="submit" value="OK"> -->
+                            <button class="btn btn-primary" type="submit" value="OK">Submit</button>	 
+                        </form>
+
+                        <form action="/input_grade/" method="post">
+                            <label for="input_grade">Your Overall Grade: </label>
+                            <input id="input_grade" type="number" name="input_grade" value="{{ input_grade }}">
+                            <input type="submit" value="OK">
                         </form>
                         </div>
                 </div>
