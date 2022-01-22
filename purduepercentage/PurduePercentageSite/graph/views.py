@@ -1,20 +1,37 @@
 from django.shortcuts import render
 
-from bokeh.plotting import figure, output_file, show 
 from bokeh.embed import components
+from bokeh.layouts import gridplot
+from bokeh.plotting import figure, show
+
+import numpy as np
+import math
+
+def histo(p, hist, edges):
+    #p = figure(title=title, tools='', background_fill_color="#fafafa")
+    p.quad(top=hist, bottom=0, left=edges[:-1], right=edges[1:],
+           fill_color="navy", line_color="white", alpha=0.5)
+
+    # change to fit the theming
+    p.y_range.start = 0
+    p.legend.location = "center_right"
+    p.legend.background_fill_color = "#fefefe"
+    p.xaxis.axis_label = 'x'
+    p.yaxis.axis_label = 'Pr(x)'
+    p.grid.grid_line_color="white"
+    return p
 
 def index(request):
-#    Store components 
-#    script, div = components(plot)
+# SQL Data Calls (Dummy Data, remove random number generation and the change measured to the data from the SQL database)
+    dat = [1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 5, 5, 5, 5, 5, 5] # JACKSONS COOL PULL FUNCTION
+    hist, edges = np.histogram(dat, density=True, bins=5)
 
-#    Feed them to the Django template.
-#    return render(request, 'bokeh/index.html',
-#            {'script' : script , 'div' : div} )
-  
-# Input Fields -> Parse Relevant Data -> Plot Relevant Plot
+# Plot
+    plot = figure(title = "test")
+    plot = histo(plot, hist, edges)
 
-    plot = figure(plot_width=400, plot_height=400)
-    plot.circle([1, 2, 3, 4, 5], [6, 7, 2, 4, 5], size=20, color="navy", alpha=0.5)
+# Write script and div
     script, div = components(plot)
 
-    return render(request, 'bokeh/index.html', {'script': script, 'div': div})
+    return render(request, 'bokeh/index.html', 
+        {'script': script, 'div': div} )
