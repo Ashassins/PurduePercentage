@@ -19,4 +19,5 @@ from django.urls import include, path
 urlpatterns = [
     path('pphomepage/', include('pphomepage.urls')),
     path('admin/', admin.site.urls),
+    path('graph/', include('graph.urls')),
 ]
