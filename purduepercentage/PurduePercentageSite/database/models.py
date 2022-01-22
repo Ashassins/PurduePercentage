@@ -31,7 +31,15 @@ class Lifestyle(TextChoices):
 class CourseListing(Model):
     department = CharField(max_length=255)
     course_number = CharField(max_length=255)
-    course_title = CharField(max_length=255)
+    course_title = CharField(max_length=255, null=True)
+
+    def __str__(self) -> str:
+        rv = f"<Course: {self.department}-{self.course_number}"
+        if title := self.course_title:
+            rv += f" ({title})"
+        rv += ">"
+        return rv
+
 
 class Professor(Model):
     department = CharField(max_length=255)
@@ -68,3 +76,6 @@ class Exam(Model):
     num_semesters = IntegerField(null=True)
     coop = BooleanField()
     retake = BooleanField()
+
+    def __str__(self) -> str:
+        return f"<Exam: course={self.course}, exam={self.exam}, score={self.score}k"
