@@ -53,12 +53,16 @@ def get_all_courses() -> List[CourseListing]:
 def get_departments() -> List[str]:
     return list(set(map(lambda course: course.department, CourseListing.objects.all())))
 
-
 class Professor(Model):
     department = CharField(max_length=255)
     first = CharField(max_length=255)
     last = CharField(max_length=255)
 
+    def __str__(self) -> str:
+        return f"{self.first} {self.last}"
+
+def get_prof_for_dep(dep: str) -> List[str]:
+    return list(map(lambda p: str(p), Professor.objects.all()))
 
 class TeachingAssistant(Model):
     department = CharField(max_length=255)
