@@ -65,5 +65,5 @@ def index(request):
 # Write script and div
     script, div = components(plot)
 
-    return render(request, 'bokeh/index.html', 
+    return render(request, 'exam.html', 
         {'script': script, 'div': div} )
