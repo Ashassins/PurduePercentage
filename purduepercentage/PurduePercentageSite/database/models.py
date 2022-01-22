@@ -1,3 +1,4 @@
+from typing import List
 from django.conf import settings
 from django.db import models
 from django.db.models.base import Model
@@ -8,12 +9,14 @@ from django.db.models.fields import CharField
 from django.db.models.fields.related import ForeignKey
 from django.utils.translation import gettext_lazy
 
+
 class ExamType(TextChoices):
-    MIDTERM_1 = 'M1', gettext_lazy('MIDTERM_1')
-    MIDTERM_2 = 'M2', gettext_lazy('MIDTERM_2')
-    MIDTERM_3 = 'M3', gettext_lazy('MIDTERM_3')
-    MIDTERM_4 = 'M4', gettext_lazy('MIDTERM_4')
-    FINAL = 'FN', gettext_lazy('FINAL')
+    MIDTERM_1 = "M1", gettext_lazy("MIDTERM_1")
+    MIDTERM_2 = "M2", gettext_lazy("MIDTERM_2")
+    MIDTERM_3 = "M3", gettext_lazy("MIDTERM_3")
+    MIDTERM_4 = "M4", gettext_lazy("MIDTERM_4")
+    FINAL = "FN", gettext_lazy("FINAL")
+
 
 class StudyType(TextChoices):
     REWATCH = "RW", gettext_lazy("REWATCH")
@@ -23,10 +26,12 @@ class StudyType(TextChoices):
     FLASHCARDS = "FC", gettext_lazy("FLASHCARDS")
     OTHER = "OT", gettext_lazy("OTHER")
 
+
 class Lifestyle(TextChoices):
-    SEDENTARY = 'SE', gettext_lazy('SEDENTARY')
-    MODERATE = 'MO', gettext_lazy('MODERATE')
-    ACTIVE = 'AC', gettext_lazy('ACTIVE')
+    SEDENTARY = "SE", gettext_lazy("SEDENTARY")
+    MODERATE = "MO", gettext_lazy("MODERATE")
+    ACTIVE = "AC", gettext_lazy("ACTIVE")
+
 
 class CourseListing(Model):
     department = CharField(max_length=255)
@@ -41,18 +46,29 @@ class CourseListing(Model):
         return rv
 
 
+def get_all_courses() -> List[CourseListing]:
+    return CourseListing.objects.all()
+
+
+def get_departments() -> List[str]:
+    return list(set(map(lambda course: course.department, CourseListing.objects.all())))
+
+
 class Professor(Model):
     department = CharField(max_length=255)
     first = CharField(max_length=255)
     last = CharField(max_length=255)
+
 
 class TeachingAssistant(Model):
     department = CharField(max_length=255)
     first = CharField(max_length=255)
     last = CharField(max_length=255)
 
+
 class StudyMethod(Model):
     method = CharField(max_length=2, choices=StudyType.choices, default=StudyType.OTHER)
+
 
 class Exam(Model):
     course = ForeignKey(CourseListing, on_delete=CASCADE)
@@ -72,7 +88,9 @@ class Exam(Model):
     musician = BooleanField(null=True)
     artist = BooleanField(null=True)
     athlete = BooleanField(null=True)
-    lifestyle = CharField(max_length=2, choices=Lifestyle.choices, default=Lifestyle.MODERATE, null=True)
+    lifestyle = CharField(
+        max_length=2, choices=Lifestyle.choices, default=Lifestyle.MODERATE, null=True
+    )
     num_semesters = IntegerField(null=True)
     coop = BooleanField()
     retake = BooleanField()
