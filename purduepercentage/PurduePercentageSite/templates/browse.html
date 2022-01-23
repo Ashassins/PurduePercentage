@@ -45,7 +45,7 @@
                     <div class="card" >
                         <div class="card-body" >
                             <h5 class="card-title">Filter/Search</h5>
-                            <hr>
+                            <!-- <hr>
                             <h6 class="card-subtitle mb-2">Search</h6>
                             <div class="row"> 
                                 <form class="d-flex">
@@ -59,17 +59,28 @@
                                     <input class="form-control" type="text" id="time"/>  
                                 </div>
                             </div>
-                            <br> 
-                            <h6 class="card-subtitle mb-2">School</h6>
+                            <br>  -->
+                            <!-- <h6 class="card-subtitle mb-2">School</h6> -->
                             <div class="row"> 
                                 <div class="container">
-                                    <select class="form-select" id="inputGroupSelect01">
+                                    <form method='post' action='../browse/' class="d-flex">
+                                        {% csrf_token %}
+                                        <select class="form-control me-2" id="dept" name='selected_dept'>
+                                            {% for dept in depts %}
+                                                    <option value='{{dept}}'>{{ dept }}</option>
+                                            {% endfor %}
+                                            <option value='ALL'>ALL</option>
+                                        </select>
+                                        <input class="form-control me-2" name="selected_number" placeholder="ID" aria-label="Number">
+                                        <button class="btn btn-outline-success" type="submit">Go</button>
+                                    </form>
+                                    <!-- <select class="form-select" id="inputGroupSelect01">
                                         <option selected>Choose...</option>
                                         <option value="1">AAE</option>
                                         <option value="2">ECE</option>
                                         <option value="3">ENGR</option>
                                         <option value="4">ME</option>
-                                    </select>
+                                    </select> -->
                                 </div>
                             </div>
                         </div>
@@ -92,7 +103,7 @@
                                     {% for row in data %}
                                         <tr>
                                         {% for cell in row %}
-                                            <td>{{ cell }}</td>
+                                            <td><a href="../exam/?q={{row.0}}" class"row-link">{{ cell }}</a></td>
                                         {% endfor %}
                                         </tr>
                                     {% endfor %}

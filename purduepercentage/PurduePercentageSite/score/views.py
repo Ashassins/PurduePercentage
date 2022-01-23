@@ -21,13 +21,20 @@ def get_score(request):
 
             if (form.cleaned_data['your_score'] > 100):
                 form.cleaned_data['your_score'] = 100
+            
+            # Getting parameters from url for Course Title
+            course_title = form.cleaned_data['your_course']
+            course_dept = course_title.split(" ")[0].lower()
+            course_num = course_title.split(" ")[1]
+            print(course_dept)
+            print(course_num)
 
             courses = get_all_courses()
-            create_course(department="ece", number=20875)
+            create_course(department=course_dept, number=course_num)
             found_course = None
             for course in courses:
-                if (course.department == "ece" and course.course_number == "20875"):
-                    # print("found in loop")
+                if (course.department == course_dept and course.course_number == str(course_num)):
+                    print("found in loop")
                     found_course = course
             if (found_course != None):
                 print("found course")

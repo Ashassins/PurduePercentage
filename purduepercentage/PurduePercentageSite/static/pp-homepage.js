@@ -1,5 +1,7 @@
-var homepageCarousel = document.getElementById('homepageCarousel')
+// var homepageCarousel = document.getElementById('homepageCarousel')
 
-homepageCarousel.addEventListener('slide.bs.carousel', function () {
-  // do something...
+var myCarousel = document.querySelector('#homepageCarousel')
+var homepageCarousel = new bootstrap.Carousel(myCarousel, {
+    interval: 10,
+    wrap: false
 })
