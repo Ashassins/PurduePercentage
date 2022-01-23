@@ -1,0 +1,124 @@
+<html lang="en">
+    <head>
+        {% load static %}
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <script src=”https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js”></script> 
+        <script src=”https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js”></script>
+        <script type=”text/javascript” src=”https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js”></script>
+        <link href=”https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css” rel=”stylesheet”>
+        <script src=”https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js”> </script>
+        <script src="{% static '/clickable_row.js' %}" type="text/javascript"></script>
+    </head>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand nav-link active" href="../pphomepage/">Purdue / Percentage</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                <a class="nav-link" href="#">Discussions</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="#">Browse</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link">Dashboard</a>
+                </li>
+            </ul>
+            <div>
+                <button class="btn btn-primary" onclick="location.href='../score/'">Submit Data</button>
+                <button class="btn btn-outline-primary" type="submit">Login</button>	 
+                <!-- <button class="btn btn-outline-primary" type="submit">Signup</button> -->
+            </div>
+            </div>
+        </div>
+    </nav>
+
+    <body>
+        <div class="row"> 
+            <div id="average_slicer_card" class="col-md-3 container">
+                &nbsp;
+                <div class="row container" style="padding-right: 0px">
+                    <a style="font-size:28">Browse Exams</a>
+                    <div class="card" >
+                        <div class="card-body" >
+                            <h5 class="card-title">Filter/Search</h5>
+                            <hr>
+                            <h6 class="card-subtitle mb-2">Search</h6>
+                            <div class="row"> 
+                                <form class="d-flex">
+                                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                                    <button class="btn btn-outline-success" type="submit">Go</button>
+                                </form>
+                            </div>
+                            <h6 class="card-subtitle mb-2">Date Range</h6>
+                            <div class="row"> 
+                                <div class="container">
+                                    <input class="form-control" type="text" id="time"/>  
+                                </div>
+                            </div>
+                            <br> 
+                            <h6 class="card-subtitle mb-2">School</h6>
+                            <div class="row"> 
+                                <div class="container">
+                                    <select class="form-select" id="inputGroupSelect01">
+                                        <option selected>Choose...</option>
+                                        <option value="1">AAE</option>
+                                        <option value="2">ECE</option>
+                                        <option value="3">ENGR</option>
+                                        <option value="4">ME</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="graph_card" class="col-md-9 container">
+                &nbsp;
+                <div class="row container" style="padding-right: 0px; padding-left: 0px" >
+                    <div class="card col-md-12">
+                        <div class="card-body">
+                            <h5 class="card-title">Results</h5>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Course Code</th>
+                                        <th scope="col">Exam Name</th>
+                                        <th scope="col">Exam Average</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">1/21/2022</th>
+                                                <td>ECE 20875</td>
+                                                <td><a href="../exam" class="row-link">Midterm 1</a></td>
+                                                <td>67%</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">3/2/2022</th>
+                                                <td>ECE 368</td>
+                                                <td>Final</td>
+                                                <td>80%</td>
+                                        </tr>
+                                    </tbody>
+                            </table>
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination">
+                                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                </ul>
+                                </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
