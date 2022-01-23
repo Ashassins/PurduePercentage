@@ -103,9 +103,9 @@ class Exam(Model):
     def __str__(self) -> str:
         return f"<Exam: course={self.course}, exam={self.exam}, score={self.score}>"
 
-def create_course(department: str, number: int, title: Optional[str]):
-    if not CourseListing.objects.filter(department=department, number=number):
-        c = CourseListing(department=department, number=number, title=title)
+def create_course(department: str, number: int, title: Optional[str] = None):
+    if not CourseListing.objects.filter(department=department, course_number=number):
+        c = CourseListing(department=department, course_number=number, course_title=title)
         c.save()
 
 def create_exam(course: CourseListing, score: float):
