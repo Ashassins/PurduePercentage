@@ -6,7 +6,7 @@
         <script src="{% static '/bootstrap.min.js' %}"></script>
         <script type=”text/javascript” src="{% static '/moment.min.js' %}"></script>
         <link href=”https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css” rel=”stylesheet”>
-        <script src="{% static '/bootstrap-datetimepicker.min.js' %}""> </script>
+        <script src="{% static '/bootstrap-datetimepicker.min.js' %}"> </script>
 
     </head>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -21,7 +21,7 @@
                 <a class="nav-link" href="#">Discussions</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="#">Browse</a>
+                <a class="nav-link" href="../browse/">Browse</a>
                 </li>
                 <!-- <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -39,7 +39,7 @@
                 </li>
             </ul>
             <div>
-                <button class="btn btn-primary" type="submit">Submit Data</button>	 
+                <button class="btn btn-primary" onclick="location.href='../score/'">Submit Data</button>	 
                 <button class="btn btn-outline-primary" type="submit">Login</button>	 
                 <!-- <button class="btn btn-outline-primary" type="submit">Signup</button> -->
             </div>
