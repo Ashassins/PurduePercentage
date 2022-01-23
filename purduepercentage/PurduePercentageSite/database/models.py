@@ -9,7 +9,6 @@ from django.db.models.fields import CharField
 from django.db.models.fields.related import ForeignKey
 from django.utils.translation import gettext_lazy
 
-
 class ExamType(TextChoices):
     MIDTERM_1 = "M1", gettext_lazy("MIDTERM_1")
     MIDTERM_2 = "M2", gettext_lazy("MIDTERM_2")
@@ -32,6 +31,13 @@ class Lifestyle(TextChoices):
     MODERATE = "MO", gettext_lazy("MODERATE")
     ACTIVE = "AC", gettext_lazy("ACTIVE")
 
+class LetterGrade(TextChoices):
+    A = "A", gettext_lazy("A")
+    B = "B", gettext_lazy("B")
+    C = "C", gettext_lazy("C")
+    D = "D", gettext_lazy("D")
+    F = "F", gettext_lazy("F")
+
 
 class CourseListing(Model):
     department = CharField(max_length=255)
@@ -45,15 +51,6 @@ class CourseListing(Model):
         rv += ">"
         return rv
 
-def get_all_courses() -> List[CourseListing]:
-    return CourseListing.objects.all()
-
-def get_departments() -> List[str]:
-    return list(set(map(lambda course: course.department, CourseListing.objects.all())))
-
-def get_course(department: str, number: int) -> Optional[CourseListing]:
-    return CourseListing.objects.get(department=department, number=number)
-
 class Professor(Model):
     department = CharField(max_length=255)
     first = CharField(max_length=255)
@@ -62,24 +59,20 @@ class Professor(Model):
     def __str__(self) -> str:
         return f"{self.first} {self.last}"
 
-def get_prof_for_dep(dep: str) -> List[str]:
-    return list(map(lambda p: str(p), Professor.objects.all()))
-
 class TeachingAssistant(Model):
     department = CharField(max_length=255)
     first = CharField(max_length=255)
     last = CharField(max_length=255)
 
-
 class StudyMethod(Model):
     method = CharField(max_length=2, choices=StudyType.choices, default=StudyType.OTHER)
-
 
 class Exam(Model):
     course = ForeignKey(CourseListing, on_delete=CASCADE)
     exam = CharField(max_length=2, choices=ExamType.choices, default=ExamType.MIDTERM_1)
     year = IntegerField(null=True)
     score = FloatField()
+    letter_grade = CharField(max_length=2 , choices=LetterGrade.choices, default=LetterGrade.A)
     professor = ForeignKey(Professor, on_delete=CASCADE, null=True)
     ta = ForeignKey(TeachingAssistant, on_delete=CASCADE, null=True)
     lec_attendance = BooleanField()
@@ -103,6 +96,10 @@ class Exam(Model):
     def __str__(self) -> str:
         return f"<Exam: course={self.course}, exam={self.exam}, score={self.score}>"
 
+
+def get_prof_for_dep(dep: str) -> List[str]:
+    return list(map(lambda p: str(p), Professor.objects.all()))
+
 def create_course(department: str, number: int, title: Optional[str] = None):
     if not CourseListing.objects.filter(department=department, course_number=number):
         c = CourseListing(department=department, course_number=number, course_title=title)
@@ -112,3 +109,14 @@ def create_exam(course: CourseListing, score: float):
     e = Exam(course=course, score=score)
     e.save()
 
+def get_all_courses() -> List[CourseListing]:
+    return CourseListing.objects.all()
+
+def get_departments() -> List[str]:
+    return list(set(map(lambda course: course.department, CourseListing.objects.all())))
+
+def get_course(department: str, number: int) -> Optional[CourseListing]:
+    return CourseListing.objects.get(department=department, number=number)
+
+def get_exams_for_course(course: CourseListing) -> List[Exam]:
+    return Exam.objects.filter(course=course)

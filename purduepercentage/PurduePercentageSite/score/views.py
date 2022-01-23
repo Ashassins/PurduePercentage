@@ -1,7 +1,12 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-
+from django.apps import apps
 from .forms import ScoreForm
+
+ExamModel = apps.get_model("database", "Exam")
+CourseListingModel = apps.get_model("database", "CourseListing")
+# BAD :(
+from database.models import *
 
 def get_score(request):
     # if this is a POST request we need to process the form data
@@ -13,6 +18,10 @@ def get_score(request):
             # process the data in form.cleaned_data as required
             # ...
             # redirect to a new URL:
+
+            courses = get_all_courses()
+            #create_course(department="ece", number=20875)
+
             print("Got Post Request")
             print(form.cleaned_data['your_score'])
             print(form.cleaned_data['your_grade'])
