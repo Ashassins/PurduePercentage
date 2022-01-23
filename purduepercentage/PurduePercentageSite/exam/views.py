@@ -9,12 +9,41 @@ import math
 
 from database.models import *
 
+def hex_two_rgb(hex) -> tuple :
+    hex = hex.lstrip('#')
+    rgb = tuple(int(hex[i:i + len(hex) // 3]) for i in range(0, len(hex), len(hex) // 3))
+    return rgb
+
+def rgb_two_hex(rgb) -> str :
+    string = "#"
+    return string.append(str(hex(rgb[i])) for i in range(0, 3)) 
+
+def interpolate(rgb1 : tuple, rgb2 : tuple) -> tuple:
+    params = List(tuple(rgb2[i] - rgb1[i], rgb1[i]) for i in range(0, len(rgb1))) 
+    return params
+
+def grad(codes : List, n : int) -> List :
+    rgb_vals = [hex_two_rgb(codes[i] for i in range(0, len(codes)))]
+    
+    # linerly interpolate between each points
+    interpol = []
+    interpol.append(interpolate(rgb_vals[i+1], rgb_vals[i]) for i in range(0, len(rgb_vals) - 1))
+
+    for j in np.linspace(0, 8, n) :
+        bucket = interpol[round(j)]
+        rgb = tuple(int(bucket[0][0] * j + bucket[0][1]))
+
+    return hex_grad
+
 def histo(p, hist, edges):
     #p = figure(title=title, tools='', background_fill_color="#fafafa")
     # creates a quadrilateral for each of the buckets and sets the height relative to the frequency
     # can add color based on the data
+    colors = ['#F72585', '#B5179E', '#7209B7','#560BAD', '#480CA8', '#3A0CA3', '#3F37C9', '#4361EE', '#4895EF', '#4CC9F0']
+    #r_g_b_a = {"r" : [], "g" : [], "b" : [], "a" : []}
+
     p.quad(top=hist, bottom=0, left=edges[:-1], right=edges[1:],
-           fill_color="navy", line_color="white", alpha=0.5) 
+           fill_color=colors, line_color="#B5179E", alpha=0.5) 
 
     # plot formatting
     p.y_range.start = 0
@@ -29,7 +58,7 @@ def histo(p, hist, edges):
 def scatter(p, hori, vert) :
     # add coloring based on the data
     sz = 0.1
-    p.scatter(x = hori, y = vert, size = sz, marker = "asterix")
+    p.scatter(x = hori, y = vert, size = sz)
     
     # plot formatting
     p.y_range.start = 0
@@ -76,7 +105,7 @@ def exam(request):
 
 # Plot
     plot = figure(title = "test")
-    plot = histo(plot, hist, edges)
+    plot = scatter(plot, dat, dat) #histo(plot, hist, edges)
 
 # Write script and div
     script, div = components(plot)
