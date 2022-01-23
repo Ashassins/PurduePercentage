@@ -43,7 +43,7 @@ def histo(p, hist, edges):
     #r_g_b_a = {"r" : [], "g" : [], "b" : [], "a" : []}
 
     p.quad(top=hist, bottom=0, left=edges[:-1], right=edges[1:],
-           fill_color=colors, line_color="#B5179E", alpha=0.5) 
+           fill_color="navy", line_color="#000000", alpha=0.5) 
 
     # plot formatting
     p.y_range.start = 0
@@ -114,7 +114,7 @@ def exam(request):
 
 # Plot
     plot = figure(title = "test")
-    plot = scatter(plot, dat, dat) #histo(plot, hist, edges)
+    plot = histo(plot, hist, edges)
 
 # Write script and div
     script, div = components(plot)
