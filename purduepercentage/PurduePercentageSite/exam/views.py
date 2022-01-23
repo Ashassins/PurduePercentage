@@ -81,6 +81,7 @@ def exam(request):
             dat.append(exam.score)
     hist, edges = np.histogram(dat, density=True, bins=round(math.sqrt(len(dat))))
     exam_avg = round(sum(dat) / len(dat))
+    rep_cnt = len(dat)
 
 # Plot
     plot = figure(title = "test")
@@ -90,4 +91,4 @@ def exam(request):
     script, div = components(plot)
 
     return render(request, 'exam.html', 
-        {'script': script, 'div': div, 'exam_avg': exam_avg, 'course_title': course_title} )
+        {'script': script, 'div': div, 'exam_avg': exam_avg, 'rep_cnt': rep_cnt, 'course_title': course_title} )

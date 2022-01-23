@@ -27,7 +27,7 @@ def browse(request):
         num_filter = request.POST['selected_number']
 
 
-    field_names = ['Course Code', 'Exam Average']
+    field_names = ['Course Code', 'Exam Average', 'Number of Reports']
     courses = get_all_courses()
     course_names = [c.department.upper() + " " + str(c.course_number) for c in courses]
     depts = list(set([c_n.split(" ")[0] for c_n in course_names]))
@@ -41,10 +41,11 @@ def browse(request):
     # for exams in exams_set:
     exams_scores_only = [[e.score for e in exams] for exams in exams_set]
     exam_avgs_set = [round(sum(exams) / len(exams)) for exams in exams_scores_only]
+    exam_reports_set = [len(exams) for exams in exams_scores_only]
     print(exam_avgs_set)
     data = []
     for i in range(len(course_names)):
-        data.append([str(course_names[i]), str(exam_avgs_set[i])])
+        data.append([str(course_names[i]), str(exam_avgs_set[i]), str(exam_reports_set[i])])
     # model = CourseListing
     # field_names = [f.name for f in model._meta.get_fields()]
     # data = [[getattr(ins, name) for name in field_names]
