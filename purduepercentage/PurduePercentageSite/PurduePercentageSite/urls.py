@@ -23,4 +23,5 @@ urlpatterns = [
     path('score/', include('score.urls')),
     path('exam/', include('exam.urls')),
     path('browse/', include('browse.urls')),
+    path('dashboard/', include('dashboard.urls')),
 ]
