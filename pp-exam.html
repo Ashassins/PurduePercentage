@@ -6,7 +6,7 @@
     </head>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand nav-link active" href="#">Purdue / Percentage</a>
+            <a class="navbar-brand nav-link active" href="../pphomepage/">Purdue / Percentage</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
@@ -18,29 +18,19 @@
                 <li class="nav-item">
                 <a class="nav-link" href="#">Browse</a>
                 </li>
-                <!-- <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Dropdown
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-                </li> -->
                 <li class="nav-item">
                 <a class="nav-link">Dashboard</a>
                 </li>
             </ul>
             <div>
-                <button class="btn btn-primary" type="submit">Submit Data</button>	 
+                <button class="btn btn-primary" onclick="location.href='../score/'">Submit Data</button>
                 <button class="btn btn-outline-primary" type="submit">Login</button>	 
                 <!-- <button class="btn btn-outline-primary" type="submit">Signup</button> -->
             </div>
             </div>
         </div>
     </nav>
+    
     <body>
         <div class="row"> 
             <div id="average_slicer_card" class="col-md-4 container">
@@ -91,26 +81,29 @@
                             <h5 class="card-title">Plots</h5>
                             <ul class="nav nav-tabs">
                                 <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="#">Histogram</a>
+                                    <a class="nav-link active" id="histogram" aria-current="page" href="#">Histogram</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Scatter</a>
+                                    <a class="nav-link" id="scatter" href="#">Scatter</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Pie</a>
+                                    <a class="nav-link" id="pie" href="#">Pie</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#" >Box & Whisker</a>
+                                    <a class="nav-link" id="box-and-whisker" href="#" >Box & Whisker</a>
                                 </li>
                             </ul>
                             <div class="tab-content" id="myTabContent">
-                                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="tab-pane fade show active" id="histogram" role="tabpanel" aria-labelledby="home-tab">
                                     {{div | safe}}
                                 </div>
-                                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                <div class="tab-pane fade" id="profile" role="scatter" aria-labelledby="profile-tab">
 
                                 </div>
-                                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                                <div class="tab-pane fade" id="contact" role="pie" aria-labelledby="contact-tab">
+                                    
+                                </div>
+                                <div class="tab-pane fade" id="contact" role="box-and-whisker" aria-labelledby="contact-tab">
                                     
                                 </div>
                             </div>
