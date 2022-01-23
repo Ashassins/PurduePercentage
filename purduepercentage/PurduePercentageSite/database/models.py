@@ -75,10 +75,10 @@ class Exam(Model):
     letter_grade = CharField(max_length=2 , choices=LetterGrade.choices, default=LetterGrade.A)
     professor = ForeignKey(Professor, on_delete=CASCADE, null=True)
     ta = ForeignKey(TeachingAssistant, on_delete=CASCADE, null=True)
-    lec_attendance = BooleanField()
-    rec_attendance = BooleanField()
+    lec_attendance = BooleanField(null=True)
+    rec_attendance = BooleanField(null=True)
     study_method = ForeignKey(StudyMethod, on_delete=CASCADE, null=True)
-    hrs_study = IntegerField()
+    hrs_study = IntegerField(null=True)
     major = CharField(max_length=255, null=True)
     minor = CharField(max_length=255, null=True)
     avg_sleep = IntegerField(null=True)
@@ -90,8 +90,8 @@ class Exam(Model):
         max_length=2, choices=Lifestyle.choices, default=Lifestyle.MODERATE, null=True
     )
     num_semesters = IntegerField(null=True)
-    coop = BooleanField()
-    retake = BooleanField()
+    coop = BooleanField(null=True)
+    retake = BooleanField(null=True)
 
     def __str__(self) -> str:
         return f"<Exam: course={self.course}, exam={self.exam}, score={self.score}>"

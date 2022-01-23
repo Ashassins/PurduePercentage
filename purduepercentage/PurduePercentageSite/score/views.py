@@ -19,11 +19,30 @@ def get_score(request):
             # ...
             # redirect to a new URL:
 
-            courses = get_all_courses()
-            #create_course(department="ece", number=20875)
+            if (form.cleaned_data['your_score'] > 100):
+                form.cleaned_data['your_score'] = 100
 
+            courses = get_all_courses()
+            create_course(department="ece", number=20875)
+            found_course = None
+            for course in courses:
+                if (course.department == "ece" and course.course_number == "20875"):
+                    # print("found in loop")
+                    found_course = course
+            if (found_course != None):
+                print("found course")
+                create_exam(found_course, float(form.cleaned_data['your_score']))
+                print("Current Exams")
+                exams = get_exams_for_course(found_course)
+                for exam in exams:
+                    print(exam.score)
+            
+            # get_course("ECE", 20875)
+            #create_course(department="ece", number=20875)
+            # print(courses)
             print("Got Post Request")
             print(form.cleaned_data['your_score'])
+            print(type(form.cleaned_data['your_score']))
             print(form.cleaned_data['your_grade'])
             return HttpResponseRedirect('/pphomepage/')
 
