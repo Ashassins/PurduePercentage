@@ -84,27 +84,41 @@
                             <h5 class="card-title">Results</h5>
                             <table class="table table-striped">
                                 <thead>
+                                    {% for head in field_names %}
+                                        <th>{{ head }}</th>
+                                    {% endfor %}
+                                </thead>
+                                <tbody>
+                                    {% for row in data %}
+                                        <tr>
+                                        {% for cell in row %}
+                                            <td>{{ cell }}</td>
+                                        {% endfor %}
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                                <!-- <thead>
                                     <tr>
                                         <th scope="col">Date</th>
                                         <th scope="col">Course Code</th>
                                         <th scope="col">Exam Name</th>
                                         <th scope="col">Exam Average</th>
                                     </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row">1/21/2022</th>
-                                                <td>ECE 20875</td>
-                                                <td><a href="../exam" class="row-link">Midterm 1</a></td>
-                                                <td>67%</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3/2/2022</th>
-                                                <td>ECE 368</td>
-                                                <td>Final</td>
-                                                <td>80%</td>
-                                        </tr>
-                                    </tbody>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1/21/2022</th>
+                                            <td>ECE 20875</td>
+                                            <td><a href="../exam" class="row-link">Midterm 1</a></td>
+                                            <td>67%</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3/2/2022</th>
+                                            <td>ECE 368</td>
+                                            <td>Final</td>
+                                            <td>80%</td>
+                                    </tr>
+                                </tbody> -->
                             </table>
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination">
