@@ -16,23 +16,12 @@
                 <li class="nav-item">
                 <a class="nav-link" href="../browse/">Browse</a>
                 </li>
-                <!-- <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Dropdown
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-                </li> -->
                 <li class="nav-item">
-                <a class="nav-link">Dashboard</a>
+                <a class="nav-link" href="../dashboard/">Dashboard</a>
                 </li>
             </ul>
             <div>
-                <!-- <button class="btn btn-primary" type="submit">Submit Data</button>	  -->
+                <!-- <button class="btn btn-primary" onclick="location.href='../score/'">Submit Data</button> -->
                 <button class="btn btn-outline-primary" type="submit">Login</button>	 
                 <!-- <button class="btn btn-outline-primary" type="submit">Signup</button> -->
             </div>
@@ -41,30 +30,36 @@
     </nav>
     
     <body>
-        <div class="col-md-12"></div>
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <form action="/score/" method="post">
-                            <label for="score">Your Exam Score: </label>
-                            {% csrf_token %}
-                            <!-- {{form}} -->
-                            <div class="row">{{ form.your_course.label }}</div>
-                            <div class="row">{{ form.your_course }}</div>
-                            <div class="row">{{ form.your_score.label }}</div>
-                            <div class="row">{{ form.your_score }}</div>
-                            <div class="row">{{ form.your_grade.label }}</div>
-                            <div class="row">{{ form.your_grade }}</div>
-                            <!-- <input id="input_score" type="number" class="form-control rounded-4" name="input_score" placeholder="(XX.XX%)" value="{{ input_score }}"> -->
-                            <!-- <input class="button-primary" type="submit" value="OK"> -->
-                            <button class="btn btn-primary" type="submit" value="OK">Submit</button>	 
-                            <!-- <label for="input_grade">Your Overall Grade: </label> -->
-                            <!-- <input id="input_grade" type="number" name="input_grade" value="{{ input_grade }}">
-                            <input type="submit" value="OK"> -->
-                        </form>
-                        </div>
+        <div class="row container" style="max-width: none; padding-right: 0;">
+            <div class="col-md-12 py-1"></div>
+                <div class="card px-4">
+                    <div class="card-body">
+                        <div class="row">
+                            <form action="/score/" method="post">
+                                {% csrf_token %}
+                                <!-- {{form}} -->
+                                <div class="row">{{ form.your_course.label }}</div>
+                                <div class="row">{{ form.your_course }}</div>
+                                <div class="row">{{ form.your_score.label }}</div>
+                                <div class="row">{{ form.your_score }}</div>
+                                <div class="row">{{ form.your_grade.label }}</div>
+                                <div class="row">{{ form.your_grade }}</div>
+                                <!-- <div class="row">{{ form.your_study_time.label }}</div>
+                                <div class="row">{{ form.your_study_time }}</div>
+                                <div class="row">{{ form.your_sleep_time.label }}</div>
+                                <div class="row">{{ form.your_sleep_time }}</div> -->
+                                <!-- <input id="input_score" type="number" class="form-control rounded-4" name="input_score" placeholder="(XX.XX%)" value="{{ input_score }}"> -->
+                                <!-- <input class="button-primary" type="submit" value="OK"> -->
+                                <br>
+                                <button class="row btn btn-primary" type="submit" value="OK">Submit</button>	 
+                                <!-- <label for="input_grade">Your Overall Grade: </label> -->
+                                <!-- <input id="input_grade" type="number" name="input_grade" value="{{ input_grade }}">
+                                <input type="submit" value="OK"> -->
+                            </form>
+                            </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </div>  
     </body>
 </html>
