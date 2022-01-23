@@ -90,4 +90,4 @@ def exam(request):
     script, div = components(plot)
 
     return render(request, 'exam.html', 
-        {'script': script, 'div': div, 'exam_avg': exam_avg} )
+        {'script': script, 'div': div, 'exam_avg': exam_avg, 'course_title': course_title} )
