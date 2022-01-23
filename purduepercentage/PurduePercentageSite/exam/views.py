@@ -7,6 +7,8 @@ from bokeh.plotting import figure, show
 import numpy as np
 import math
 
+from database.models import *
+
 def histo(p, hist, edges):
     #p = figure(title=title, tools='', background_fill_color="#fafafa")
     # creates a quadrilateral for each of the buckets and sets the height relative to the frequency
@@ -55,7 +57,30 @@ def boxandwhisker(p) :
 def exam(request):  
 # SQL Data Calls (Dummy Data, remove random number generation and the change measured to the data from the SQL database)
     dat = [1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 5, 5, 5, 5, 5, 5] # JACKSONS COOL PULL FUNCTION
-    hist, edges = np.histogram(dat, density=True, bins=5)
+    
+    # Getting parameters from url for Course Title
+    course_title = request.GET.get('q', '')
+    course_dept = course_title.split(" ")[0].lower()
+    course_num = course_title.split(" ")[1]
+    print(course_dept)
+    print(course_num)
+    
+    courses = get_all_courses()
+    create_course(department="ece", number=20875)
+    found_course = None
+    for course in courses:
+        if (course.department == course_dept and course.course_number == course_num):
+            # print("found in loop")
+            found_course = course
+    if (found_course != None):
+        print("found course")
+        print("Current Exams")
+        exams = get_exams_for_course(found_course)
+        dat.clear()
+        for exam in exams:
+            dat.append(exam.score)
+    hist, edges = np.histogram(dat, density=True, bins=round(math.sqrt(len(dat))))
+    exam_avg = round(sum(dat) / len(dat))
 
 # Plot
     plot = figure(title = "test")
@@ -65,4 +90,4 @@ def exam(request):
     script, div = components(plot)
 
     return render(request, 'exam.html', 
-        {'script': script, 'div': div} )
+        {'script': script, 'div': div, 'exam_avg': exam_avg} )

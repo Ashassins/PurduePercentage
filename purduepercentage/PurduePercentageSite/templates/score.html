@@ -49,6 +49,8 @@
                             <label for="score">Your Exam Score: </label>
                             {% csrf_token %}
                             <!-- {{form}} -->
+                            <div class="row">{{ form.your_course.label }}</div>
+                            <div class="row">{{ form.your_course }}</div>
                             <div class="row">{{ form.your_score.label }}</div>
                             <div class="row">{{ form.your_score }}</div>
                             <div class="row">{{ form.your_grade.label }}</div>
